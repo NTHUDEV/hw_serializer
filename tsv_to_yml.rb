@@ -24,6 +24,12 @@ def prep_for_yaml(filename)
 data_arr
 end
 
-File.open('test.yml','w') do |file| file.puts prep_for_yaml('programmers_survey_2014.tsv').to_yaml end
-#puts programmer_arr.to_yaml
-#convert to yaml
+begin
+  if ARGV.count < 2
+    puts prep_for_yaml(ARGV[0]).to_yaml
+  else
+    File.open(ARGV[1],'w') do |file| file.puts prep_for_yaml(ARGV[0]).to_yaml end
+  end
+rescue => e
+  puts "I'm all out of love: #{e}."
+end
